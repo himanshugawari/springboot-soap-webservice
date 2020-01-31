@@ -34,7 +34,6 @@ public class CourseDetailsEndpoint {
 	@PayloadRoot(namespace = "http://_himanshu.gawari.com/courses", localPart = "GetCourseDetailsRequest")
 	@ResponsePayload
 	public GetCourseDetailsResponse processCourseDetailsRequest(@RequestPayload GetCourseDetailsRequest request) {
-
 		Course course = courseDetailsService.findById(request.getId());
 		if (course == null)
 			throw new CourseNotFoundException("Invalid Course Id " + request.getId());
@@ -58,11 +57,8 @@ public class CourseDetailsEndpoint {
 
 	private CourseDetails mapCourse(Course course) {
 		CourseDetails courseDetails = new CourseDetails();
-
 		courseDetails.setId(course.getId());
-
 		courseDetails.setName(course.getName());
-
 		courseDetails.setDescription(course.getDescription());
 		return courseDetails;
 	}
@@ -71,21 +67,16 @@ public class CourseDetailsEndpoint {
 	@ResponsePayload
 	public GetAllCourseDetailsResponse processAllCourseDetailsRequest(
 			@RequestPayload GetAllCourseDetailsRequest request) {
-
 		List<Course> courses = courseDetailsService.findAll();
-
 		return mapAllCourseDetails(courses);
 	}
 
 	@PayloadRoot(namespace = "http://_himanshu.gawari.com/courses", localPart = "DeleteCourseDetailsRequest")
 	@ResponsePayload
 	public DeleteCourseDetailsResponse deleteCourseDetailsRequest(@RequestPayload DeleteCourseDetailsRequest request) {
-
 		Status status = courseDetailsService.deleteById(request.getId());
-
 		DeleteCourseDetailsResponse response = new DeleteCourseDetailsResponse();
 		response.setStatus(mapStatus(status));
-
 		return response;
 	}
 
@@ -96,32 +87,22 @@ public class CourseDetailsEndpoint {
 	}
 
 	// 2
+
 	/*
 	 * @PayloadRoot(namespace = "http://_himanshu.gawari.com/courses", localPart =
 	 * "GetCourseDetailsRequest")
 	 * 
 	 * @ResponsePayload public GetCourseDetailsResponse
 	 * processCourseDetailsRequest(@RequestPayload GetCourseDetailsRequest request)
-	 * {
-	 * 
-	 * Course course = courseDetailsService.findById(request.getId());
-	 * 
-	 * return mapCourse(course); }
+	 * { Course course = courseDetailsService.findById(request.getId()); return
+	 * mapCourse(course); }
 	 * 
 	 * private GetCourseDetailsResponse mapCourse(Course course) {
 	 * GetCourseDetailsResponse response = new GetCourseDetailsResponse();
-	 * 
 	 * CourseDetails courseDetails = new CourseDetails();
-	 * 
-	 * courseDetails.setId(course.getId());
-	 * 
-	 * courseDetails.setName(course.getName());
-	 * 
+	 * courseDetails.setId(course.getId()); courseDetails.setName(course.getName());
 	 * courseDetails.setDescription(course.getDescription());
-	 * 
-	 * response.setCourseDetails(courseDetails);
-	 * 
-	 * return response; }
+	 * response.setCourseDetails(courseDetails); return response; }
 	 */
 
 	// 1
@@ -132,14 +113,11 @@ public class CourseDetailsEndpoint {
 	 * @ResponsePayload public GetCourseDetailsResponse
 	 * processCourseDetailsRequest(@RequestPayload GetCourseDetailsRequest request)
 	 * { GetCourseDetailsResponse response = new GetCourseDetailsResponse();
-	 * 
 	 * CourseDetails courseDetails = new CourseDetails();
 	 * courseDetails.setId(request.getId());
 	 * courseDetails.setName("Microservices Course");
 	 * courseDetails.setDescription("That would be a wonderful course!");
-	 * 
-	 * response.setCourseDetails(courseDetails);
-	 * 
-	 * return response; }
+	 * response.setCourseDetails(courseDetails); return response; }
 	 */
+
 }
